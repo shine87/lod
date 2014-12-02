@@ -7,11 +7,11 @@
 				while( have_posts() ) {
 					the_post();
 					?>
-					<article id="single-post" <?php post_class(); ?>>
-						<h2 id="post-title">
+					<article id="single-entry" <?php post_class(); ?>>
+						<h2 id="entry-title">
 							<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
 						</h2>
-						<div id="post-content">
+						<div id="entry-content">
 							<?php the_content(); ?>
 						</div>
 					</article>

@@ -1,51 +1,36 @@
 <?php get_header(); ?>
-
 	<div id="main-content">
 		<div id="content">
-			<div id="boxes">
 
+			<div id="no-entry">
+				<h2>Oops!, something went wrong</h2>
+				<p>Check out the list below, maybe you will find something interesting.</p>
+			</div>
+
+			<div id="er-content">
 				<?php
-				if( have_posts() ) {
-					while( have_posts() ) {
-						the_post();
-						?>
-						<article id="post-<?php the_ID(); ?>" <?php post_class( 'singlebox' ); ?>>
-							<div class="isinglebox">
-								<?php if( has_post_thumbnail() ) { ?>
-									<figure><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'boxthumb' ); ?></a></figure>
-								<?php } else { ?>
-									<figure><a><img src="<?php echo get_stylesheet_directory_uri() . '/images/noimage.png'; ?>" alt="noimage"></a></figure>
-								<?php } ?>
-								<div class="post-meta">
-							<span class="post-title">
-								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-							</span>
-							<span class="post-date">
-								<?php the_time( 'd F Y' ); ?>
-							</span>
-								</div>
-							</div>
-						</article>
-					<?php
-					}
-				} else {
+				$the_query	=	new WP_Query( array(
+					'orderby'				=>	'rand',
+					'posts_per_page'		=>	25,
+					'ignore_sticky_posts'	=>	1
+				) );
+				if ( $the_query->have_posts() ) {
 					?>
-					<div id="no-post">
-						<p>Wrong Page.</p>
-					</div>
+					<ul>
+						<?php
+						while ( $the_query->have_posts() ) {
+							$the_query->the_post();
+							the_title('<li><a href="' . get_the_permalink() . '" title="' . get_the_title() . '">', '</a></li>');
+						}
+						?>
+					</ul>
 				<?php
 				}
+				wp_reset_postdata();
 				?>
-
 			</div>
-			<?php global $wp_query; $total_pages = $wp_query->max_num_pages; if( $total_pages > 1 ) { ?>
-				<nav id="page-nav-below" class="nav-below">
-					<div id="page-nav-next" class="next-page"><?php previous_posts_link( '<span class="meta-nav">&larr;</span> Newer posts' ); ?></div>
-					<div id="page-nav-prev" class="prev-page"><?php next_posts_link( 'Older posts <span class="meta-nav">&rarr;</span>' ); ?></div>
-				</nav>
-			<?php } ?>
+
 		</div>
 		<?php get_sidebar(); ?>
 	</div><!-- #main-content -->
-
 <?php get_footer(); ?>

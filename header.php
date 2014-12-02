@@ -2,30 +2,11 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<title><?php
-		global $page, $paged;
-		wp_title( '|', true, 'right' );
-		bloginfo( 'name' );
-		$site_description = get_bloginfo( 'description' );
-		if( $site_description && is_home() || is_front_page() )
-		{
-			echo ' | ' . $site_description;
-		}
-		if( $paged >= 2 || $page >=2 ) {
-			echo ' | ' . sprintf( 'Page %s', max( $paged, $page ) );
-		}
-	?></title>
-	<link href="<?php bloginfo( 'stylesheet_url' ); ?>" rel="stylesheet" type="text/css" media="all">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<meta name="viewport" content="width=device-width">
-	
-
-	<?php
-	if ( is_singular() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
-	wp_head();
-	?>
+<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <div id="big-wrapper">

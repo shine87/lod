@@ -28,11 +28,11 @@
 								<?php } else { ?>
 									<figure><a><img src="<?php echo get_stylesheet_directory_uri() . '/images/noimage.png'; ?>" alt="noimage"></a></figure>
 								<?php } ?>
-								<div class="post-meta">
-							<span class="post-title">
+								<div class="entry-meta">
+							<span class="entry-title">
 								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
 							</span>
-							<span class="post-date">
+							<span class="entry-date">
 								<?php the_time( 'd F Y' ); ?>
 							</span>
 								</div>
